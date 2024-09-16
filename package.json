@@ -24,5 +24,6 @@
     "dashboard"
   ],
   "author": "Tu Nombre",
-  "license": "ISC"
+  "license": "ISC",
+  "bin": "server/app.js" 
 }

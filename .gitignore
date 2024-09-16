@@ -1,0 +1,19 @@
+# Node modules
+node_modules/
+
+# Archivos de entorno
+*.env
+
+# Archivos de configuración del sistema
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Archivos de compilación
+dist/
+build/
+
+# Archivos generados por el sistema de gestión de versiones
+*.gitignore

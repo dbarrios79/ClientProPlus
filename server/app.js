@@ -19,7 +19,7 @@ app.use(session({
 }));
 
 // Conexión a MongoDB
-mongoose.connect('mongodb://localhost/ClientProPlus')
+mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost/ClientProPlus')
   .then(() => console.log('Conectado a MongoDB'))
   .catch(err => console.error('No se pudo conectar a MongoDB:', err));
 
