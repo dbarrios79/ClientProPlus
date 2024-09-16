@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Control - ClientPro+</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+    }
+
+    .navbar {
+      background-color: #0056b3;
+      color: white;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar .title {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .navbar .user-info {
+      display: flex;
+      align-items: center;
+    }
+
+    .username {
+      margin-right: 20px;
+      font-size: 18px;
+    }
+
+    .logout {
+      background-color: #d9534f;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 32px;
+      margin-bottom: 10px; /* Reducido para subir la sección */
+    }
+
+    .module {
+      background-color: #0056b3;
+      color: white;
+      padding: 15px;
+      margin-bottom: 15px; /* Reducido para ajustar el espacio */
+      border-radius: 8px;
+      text-align: center;
+      cursor: pointer;
+      width: 200px;
+      margin: 10px auto; /* Ajustado para centrar mejor */
+    }
+
+    .module h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .module img {
+      width: 50px;
+      height: 50px;
+      margin-top: 10px;
+    }
+
+    .footer {
+      background-color: #333;
+      color: white;
+      padding: 15px 0;
+      text-align: center;
+    }
+
+    .footer p {
+      margin: 5px 0;
+    }
+
+    .contact {
+      padding: 15px 0;
+      text-align: center;
+      background-color: #f1f1f1;
+      margin-top: -20px; /* Reduce la distancia entre las secciones */
+    }
+
+    .section-title {
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+
+    .btn-contact {
+      display: inline-block;
+      padding: 5px 10px;
+      background-color: #007bff;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-top: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-contact:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar con el título y la información del usuario -->
+  <nav class="navbar">
+    <div class="title">ClientPro+</div>
+    <div class="user-info">
+      <span class="username">Nombre del Usuario</span>
+      <div id="logout-btn" class="logout">Cerrar Sesión</div> <!-- Modificación para cerrar sesión -->
+    </div>
+  </nav>
+
+  <!-- Sección principal con los módulos -->
+  <main class="container">
+    <h1>Control Panel</h1>
+
+    <section class="module" onclick="location.href='/admin_usuarios'">
+      <h2>Usuarios</h2>
+      <img src="./images/user-icon.png" alt="Icono de Usuarios">
+    </section>
+
+    <section class="module" onclick="location.href='/inventory'"> <!-- Conexión a inventario -->
+      <h2>Inventario</h2>
+      <img src="./images/inventory-icon.png" alt="Icono de Inventario">
+    </section>
+
+    <section class="module">
+      <h2>Ventas</h2>
+      <img src="./images/sales-icon.png" alt="Icono de Ventas">
+    </section>
+  </main>
+
+  <!-- Sección de contacto -->
+  <section class="contact">
+    <div class="container">
+      <h2 class="section-title">Contáctanos</h2>
+      <p>Si tienes alguna pregunta o necesitas ayuda, no dudes en contactarnos.</p>
+      <a href="mailto:soporte@clientproplus.com" class="btn btn-contact" aria-label="Enviar Correo">
+        <i class="fas fa-envelope"></i> Enviar Correo
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer con derechos reservados -->
+  <footer class="footer">
+    <p>ClientPro+ &copy; 2024. Todos los derechos reservados.</p>
+  </footer>
+
+  <!-- Script para obtener el nombre del usuario -->
+  <script>
+    // Obtener el nombre del usuario desde la API
+    fetch('/api/username')
+      .then(response => response.json())
+      .then(data => {
+        if (data.username) {
+          document.querySelector('.username').textContent = data.username;
+        }
+      })
+      .catch(error => {
+        console.error('Error al obtener el nombre del usuario:', error);
+      });
+
+    // Función para cerrar sesión
+    document.getElementById('logout-btn').addEventListener('click', function() {
+      window.location.href = '/logout';  // Redirige a la ruta de logout
+    });
+  </script>
+</body>
+</html>

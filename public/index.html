@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=1.0, user-scalable=no">
+  <title>ClientPro+</title>
+  <link rel="stylesheet" href="./styles/styles.css"> <!-- Ruta al archivo CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Iconos -->
+  <style>
+    /* Ajustes generales para el cuerpo de la página */
+    body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden; /* Oculta la barra de desplazamiento horizontal */
+    }
+
+    /* Ajuste para la sección del logo y el encabezado */
+    .header {
+      padding: 10px 0;
+    }
+
+    /* Ajuste para la sección "Bienvenido" */
+    .hero-content {
+      padding-top: 10px; /* Aumentamos el espacio superior */
+    }
+
+    /* Ajustes para la sección de contacto */
+    .contact {
+      padding: 5px 0; /* Reducimos el espacio vertical */
+      text-align: center;
+      background-color: #f1f1f1;
+    }
+
+    .section-title {
+      font-size: 16px; /* Reducimos el tamaño del título */
+      margin-bottom: 5px; /* Reducimos el margen inferior */
+    }
+
+    .btn-contact {
+      display: inline-block;
+      padding: 5px 10px;
+      background-color: #007bff;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+      margin-top: 5px;
+    }
+
+    .btn-contact:hover {
+      background-color: #0056b3;
+    }
+
+    /* Ajustes para el pie de página */
+    .footer {
+      padding: 5px 0;
+      text-align: center;
+      background-color: #333;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="logo-container">
+        <img src="./images/clientproplu.png" alt="ClientPro+ Logo" class="logo"> <!-- Ruta a la imagen del logo -->
+      </div>
+    </div>
+  </header>
+
+  <section id="hero" class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title">Bienvenido</h1>
+        <p class="hero-text"><strong>Da un salto hacia el éxito con ClientPro+</strong></p>
+        <div class="hero-button">
+          <!-- Aquí se agrega la lógica para redirigir o ejecutar acción al hacer clic -->
+          <a href="#" class="btn btn-primary" id="start-btn">Empezar</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="container">
+      <h2 class="section-title">Contáctanos</h2>
+      <p>Si tienes alguna pregunta o necesitas ayuda, no dudes en contactarnos.</p>
+      <a href="mailto:soporte@clientproplus.com" class="btn btn-contact" aria-label="Enviar Correo">
+        <i class="fas fa-envelope"></i> Enviar Correo
+      </a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2024 ClientPro+ - Todos los derechos reservados</p>
+    </div>
+  </footer>
+
+  <!-- Script para manejar el clic en el botón "Empezar" -->
+  <script>
+    // Manejo del clic en el botón "Empezar"
+    document.getElementById('start-btn').addEventListener('click', (event) => {
+      event.preventDefault(); // Evita el comportamiento predeterminado del enlace
+      window.location.href = '/clientproplus'; // Redirige a la página clientproplus.html
+    });
+  </script>
+</body>
+</html>
+

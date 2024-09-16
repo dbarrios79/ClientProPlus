@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Cliente - ClientPro+</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            width: 300px;
+            margin: 100px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .logo {
+            margin-bottom: 20px;
+        }
+        h2 {
+            margin-bottom: 30px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        input[type="text"], input[type="number"], input[type="tel"], input[type="email"], input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Ruta del logo ajustada -->
+    <img src="/images/clientproplu.png" alt="Logo ClientPro+" class="logo" width="150">
+    <h2>Crear Cliente</h2>
+    <!-- Formulario para la creación de un nuevo cliente -->
+    <form action="/guardar_cliente" method="post">
+        <label for="nombres">Nombres:</label>
+        <input type="text" id="nombres" name="nombres" placeholder="Ingresa los nombres" required>
+
+        <label for="apellidos">Apellidos:</label>
+        <input type="text" id="apellidos" name="apellidos" placeholder="Ingresa los apellidos" required>
+
+        <label for="cedula">Cédula:</label>
+        <input type="number" id="cedula" name="cedula" placeholder="Ingresa la cédula" required>
+
+        <label for="numero_celular">Número de Celular:</label>
+        <input type="tel" id="numero_celular" name="numero_celular" placeholder="Ingresa el número de celular" required>
+
+        <label for="correo_electronico">Correo Electrónico:</label>
+        <input type="email" id="correo_electronico" name="correo_electronico" placeholder="Ingresa el correo electrónico" required>
+
+        <input type="submit" value="Crear Cliente">
+    </form>
+
+    <!-- Formulario de registro de usuarios -->
+    <h2>Crear Usuario</h2>
+    <form id="signup-form" action="/signup" method="post">
+        <label for="new-username">Nuevo Usuario:</label>
+        <input type="text" id="new-username" name="new-username" placeholder="Ingresa un nuevo nombre de usuario" required>
+
+        <label for="new-password">Nueva Contraseña:</label>
+        <input type="password" id="new-password" name="new-password" placeholder="Ingresa una nueva contraseña" required>
+
+        <input type="submit" value="Crear Usuario">
+    </form>
+</div>
+
+<!-- Script para redirigir a la página de información adicional después de enviar el formulario de registro -->
+<script>
+    document.getElementById('signup-form').addEventListener('submit', function(event) {
+        event.preventDefault(); // Evitar que se envíe el formulario de forma automática
+
+        // Realizar la conexión con el backend para registrar el usuario
+        fetch('/signup', {
+            method: 'POST',
+            body: new FormData(this)
+        })
+        .then(response => response.text()) // Cambiado a .text() para manejar el texto directamente
+        .then(data => {
+            console.log(data); // Manejar la respuesta del servidor si es necesario
+            window.location.href = "/crear_usuario"; // Redireccionar al usuario a la página de crear usuario
+        })
+        .catch(error => console.error('Error:', error));
+    });
+</script>
+
+</body>
+</html>

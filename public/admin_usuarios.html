@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClientPro+</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f0f0f0; padding: 20px; }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 60%; /* Reducido el ancho al 60% */
+            margin: 0 auto; /* Centrar el contenido */
+        }
+        h1 { text-align: center; color: #333; }
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 20px;
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .back-btn::before {
+            content: "← ";
+        }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        table, th, td { border: 1px solid #ccc; padding: 8px; }
+        th { background-color: #4CAF50; color: white; }
+        td { font-size: 14px; } /* Tamaño más pequeño para las celdas */
+        .small-col { width: 30%; } /* Ajustar el tamaño de las columnas */
+        .action-col { width: 10%; text-align: center; } /* Ajustar la columna de acciones */
+        .delete-btn { background-color: #FF4136; color: white; border: none; padding: 5px 10px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>ClientPro+</h1>
+
+        <!-- Botón de regresar -->
+        <a href="/interfaz_programa" class="back-btn">Página anterior</a>
+
+        <table id="userTable">
+            <thead>
+                <tr>
+                    <th class="small-col">Nombre de Usuario</th>
+                    <th class="action-col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Los usuarios se cargarán aquí -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Obtener y listar los usuarios
+        fetch('/admin/lista-usuarios')
+            .then(response => response.json())
+            .then(users => {
+                const tableBody = document.getElementById('userTable').querySelector('tbody');
+                users.forEach(user => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${user.username}</td>
+                        <td><button class="delete-btn" onclick="deleteUser('${user._id}')">Eliminar</button></td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            })
+            .catch(error => console.error('Error al cargar usuarios:', error));
+
+        // Función para eliminar un usuario
+        function deleteUser(userId) {
+            if (confirm('¿Estás seguro de eliminar este usuario?')) {
+                fetch(`/admin/eliminar-usuario/${userId}`, {
+                    method: 'DELETE'
+                })
+                .then(response => response.text())
+                .then(result => {
+                    alert(result);
+                    location.reload(); // Recargar la página para actualizar la lista de usuarios
+                })
+                .catch(error => console.error('Error al eliminar usuario:', error));
+            }
+        }
+    </script>
+
+</body>
+</html>
